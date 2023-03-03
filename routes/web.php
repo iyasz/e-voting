@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\authController;
+use App\Http\Controllers\userController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,5 +16,12 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('index');
 });
+
+Route::view('/auth/login', 'auth.login');
+Route::post('/login', [authController::class, 'login']);
+
+Route::get('/logout', [authController::class, 'logout']);
+
+Route::resource('siswa', userController::class);
