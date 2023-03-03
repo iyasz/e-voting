@@ -6,14 +6,15 @@
             <div class="col-8">
                 <div class="card">
                     <div class="card-body">
-                        <form action="/kandidat" method="post">
+                        <form action="/kandidat/{{$kandidat->id}}" method="post">
                             @csrf
+                            @method('put')
                             <div class="mb-3">
                                 <label class="mb-2" >Nama kandidat</label>
                                 <select name="user_id" class="form-select" aria-label="Default select example">
                                     <option selected disabled>Open this select menu</option>
                                     @foreach ($user as $data)
-                                       <option value="{{$data->id}}">{{$data->name}}</option>
+                                       <option @if($kandidat->user_id == $data->id)selected @endif value="{{$data->id}}">{{$data->name}}</option>
                                     @endforeach
                                   </select>
                                 @error('user_id') <p>{{$message}}</p> @enderror

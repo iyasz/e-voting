@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\kandidat;
+use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -14,7 +15,8 @@ class kandidatController extends Controller
      */
     public function index()
     {
-        $kandidat = kandidat::all();
+        $kandidat = kandidat::with('user')->get();
+        // dd($kandidat);
         return view('kandidat.kandidat', ['kandidat' => $kandidat]);
     }
 
@@ -23,7 +25,9 @@ class kandidatController extends Controller
      */
     public function create()
     {
-        //
+        $user = User::all()->where('role_id', 2);
+        // dd($kandidat);
+        return view('kandidat.create', ['user' => $user]);
     }
 
     /**
@@ -31,7 +35,9 @@ class kandidatController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        kandidat::create($request->except('_token'));
+        $request['vote'] = 0;
+        return redirect('/kandidat');
     }
 
     /**
@@ -47,7 +53,10 @@ class kandidatController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $kandidat = kandidat::find($id);
+        $user = User::all()->where('role_id', 2);
+
+        return view('kandidat.edit', ['kandidat' => $kandidat, 'user' => $user]);
     }
 
     /**
@@ -55,7 +64,10 @@ class kandidatController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $kandidat = kandidat::find($id);
+
+        $kandidat->update($request->except('_token'));
+        return redirect('/kandidat');
     }
 
     /**
@@ -63,6 +75,8 @@ class kandidatController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $kandidat = kandidat::find($id);
+        $kandidat->delete();
+        return redirect('/kandidat');
     }
 }

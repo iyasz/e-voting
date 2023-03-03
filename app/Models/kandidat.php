@@ -26,4 +26,9 @@ class kandidat extends Model
     protected $table = "kandidat";
     public $timestamps = FALSE;
     use HasFactory, HasUuids;
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

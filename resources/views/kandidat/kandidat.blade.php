@@ -19,11 +19,11 @@
                         @foreach ($kandidat as $data)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
-                                <td>{{ $data->name }}</td>
+                                <td>{{ $data->user->name }}</td>
                                 <td class="d-flex">
-                                    <a href="/siswa/{{ $data->id }}/edit" class="btn btn-primary btn-sm me-1"><i
+                                    <a href="/kandidat/{{ $data->id }}/edit" class="btn btn-primary btn-sm me-1"><i
                                             class="bi bi-pencil"></i></a>
-                                    <form action="/siswa/{{$data->id}}" method="post">
+                                    <form action="/kandidat/{{$data->id}}" method="post">
                                         @csrf
                                         @method('delete')
                                         <button class="btn btn-danger btn-sm"><i class="bi bi-trash3"></i></button>
