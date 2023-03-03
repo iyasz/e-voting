@@ -24,11 +24,11 @@
             <div class="offcanvas-body">
               <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
                 @if (Auth::user())
-                @if (Auth::user()->role_id == 1)
-                    
                 <li class="nav-item">
                   <a class="nav-link" href="/">Home</a>
                 </li>
+                @if (Auth::user()->role_id == 1)
+                    
                 <li class="nav-item mx-2">
                   <a class="nav-link" href="/siswa">Siswa</a>
                 </li>

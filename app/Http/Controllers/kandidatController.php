@@ -35,8 +35,8 @@ class kandidatController extends Controller
      */
     public function store(Request $request)
     {
-        kandidat::create($request->except('_token'));
         $request['vote'] = 0;
+        kandidat::create($request->except('_token'));
         return redirect('/kandidat');
     }
 
@@ -66,7 +66,9 @@ class kandidatController extends Controller
     {
         $kandidat = kandidat::find($id);
 
-        $kandidat->update($request->except('_token'));
+        $kandidat->update([
+            'user_id' => $request->user_id
+        ]);
         return redirect('/kandidat');
     }
 
