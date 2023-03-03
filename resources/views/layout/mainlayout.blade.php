@@ -23,8 +23,11 @@
             </div>
             <div class="offcanvas-body">
               <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                @if (Auth::user())
+                @if (Auth::user()->role_id == 1)
+                    
                 <li class="nav-item">
-                  <a class="nav-link active" href="#">Home</a>
+                  <a class="nav-link" href="/">Home</a>
                 </li>
                 <li class="nav-item mx-2">
                   <a class="nav-link" href="/siswa">Siswa</a>
@@ -33,8 +36,18 @@
                   <a class="nav-link" href="/kandidat">Kandidat</a>
                 </li>
                 <li class="nav-item mx-2">
-                  <a class="nav-link" href="/user">vote</a>
+                  <a class="nav-link" href="/vote">vote</a>
                 </li>
+                @endif
+                @endif
+                @if (Auth::user())
+                 @if (Auth::user()->role_id == 2)
+                    
+                <li class="nav-item mx-2">
+                  <a class="nav-link" href="/voting">voting</a>
+                </li>
+                 @endif
+                @endif
                 @if (Auth::user())
                 <li class="nav-item mx-2">
                   <a class="nav-link" href="/logout"><i class="bi bi-box-arrow-right"></i></a>
@@ -48,6 +61,9 @@
 
       @yield('content')
   
+      {{-- jquery  --}}
+      <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+      
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
   </body>
 </html>
